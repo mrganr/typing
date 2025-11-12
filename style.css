@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&family=Cairo:wght@400;600;700&display=swap');
+
+:root {
+    color-scheme: light dark;
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --text: #1f2933;
+    --muted: #5d6677;
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --danger: #e11d48;
+    --border: rgba(79, 70, 229, 0.15);
+    --shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+    --bg-pattern: radial-gradient(1200px circle at 0% 0%, rgba(79, 70, 229, 0.12), transparent 60%), radial-gradient(900px circle at 100% -20%, rgba(16, 185, 129, 0.12), transparent 55%);
+    font-family: "Tajawal", "Cairo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --surface: #101a34;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --border: rgba(148, 163, 184, 0.24);
+    --shadow: 0 20px 40px rgba(8, 47, 73, 0.3);
+    --bg-pattern: radial-gradient(1100px circle at -10% -10%, rgba(99, 102, 241, 0.22), transparent 55%), radial-gradient(900px circle at 120% -20%, rgba(45, 212, 191, 0.16), transparent 65%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg-pattern), var(--bg);
+    color: var(--text);
+    font-family: "Tajawal", "Cairo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 48px 16px 64px;
+    overflow-x: hidden;
+}
+
+.layout {
+    width: min(980px, 100%);
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 40px clamp(16px, 4vw, 48px) 48px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.layout::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(79, 70, 229, 0.08);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.subtitle {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.icon-button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+    background: rgba(79, 70, 229, 0.08);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.summary__card {
+    background: rgba(79, 70, 229, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.summary__label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.summary__value {
+    margin: 8px 0 0;
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+
+.todo-form {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(160px, 210px) auto;
+    gap: 16px;
+    align-items: end;
+    background: rgba(79, 70, 229, 0.05);
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+.todo-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.todo-form__label {
+    font-weight: 600;
+}
+
+.todo-form input,
+.todo-form select {
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    font: inherit;
+    background: rgba(148, 163, 184, 0.08);
+    color: inherit;
+}
+
+.todo-form input:focus-visible,
+.todo-form select:focus-visible,
+.toolbar input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.primary-button {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 28px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.primary-button:hover,
+.primary-button:focus-visible {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.secondary-button {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 24px;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.secondary-button:hover,
+.secondary-button:focus-visible {
+    background: rgba(79, 70, 229, 0.08);
+}
+
+.secondary-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: rgba(148, 163, 184, 0.08);
+}
+
+.toolbar {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    align-items: center;
+    background: rgba(148, 163, 184, 0.08);
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+}
+
+.toolbar__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.toolbar input[type="search"] {
+    flex: 1 1 200px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    font: inherit;
+    background: rgba(148, 163, 184, 0.08);
+}
+
+.chip {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 8px 16px;
+    background: rgba(148, 163, 184, 0.12);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.chip.is-active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary-dark);
+}
+
+.todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.todo-list__empty {
+    padding: 36px 16px;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 18px;
+    background: rgba(148, 163, 184, 0.08);
+    font-weight: 500;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.08), rgba(148, 163, 184, 0.02));
+}
+
+.todo-item__body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.todo-item__checkbox {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.todo-item__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.todo-item__text {
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.todo-item__text.is-completed {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.todo-item__edit {
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    font: inherit;
+    background: var(--surface);
+    min-width: 220px;
+}
+
+.todo-item__meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.todo-item__priority[data-priority="high"]::before {
+    content: "أولوية: عالية";
+    color: #dc2626;
+}
+
+.todo-item__priority[data-priority="medium"]::before {
+    content: "أولوية: متوسطة";
+}
+
+.todo-item__priority[data-priority="low"]::before {
+    content: "أولوية: منخفضة";
+    color: #047857;
+}
+
+.todo-item__actions {
+    display: flex;
+    gap: 6px;
+}
+
+.footer {
+    text-align: center;
+    color: var(--muted);
+    display: grid;
+    gap: 6px;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.warning {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(225, 29, 72, 0.12);
+    border: 1px solid rgba(225, 29, 72, 0.35);
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.warning[hidden] {
+    display: none;
+}
+
+.hint {
+    margin: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 800px) {
+    body {
+        padding: 32px 12px 48px;
+    }
+
+    .layout {
+        border-radius: 20px;
+        padding: 28px 20px;
+        gap: 24px;
+    }
+
+    .todo-form {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 12px;
+    }
+
+    .toolbar {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .icon-button {
+        width: 40px;
+        height: 40px;
+    }
+}
