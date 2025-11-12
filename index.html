@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظّم مهامي اليومي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="layout">
+        <header class="header" aria-labelledby="app-title">
+            <div>
+                <h1 id="app-title">منظّم مهامي</h1>
+                <p class="subtitle">تابع تقدمك اليومي وأدر مهامك بسرعة.</p>
+            </div>
+            <button id="theme-toggle" type="button" class="icon-button" aria-label="تبديل المظهر" aria-pressed="false">
+                <span aria-hidden="true">🌗</span>
+            </button>
+        </header>
+
+        <section class="summary" aria-label="لوحة الإحصائيات">
+            <article class="summary__card">
+                <p class="summary__label">المهام النشطة</p>
+                <p class="summary__value" id="summary-active">0</p>
+            </article>
+            <article class="summary__card">
+                <p class="summary__label">المهام المكتملة</p>
+                <p class="summary__value" id="summary-completed">0</p>
+            </article>
+            <article class="summary__card">
+                <p class="summary__label">إجمالي المهام</p>
+                <p class="summary__value" id="summary-total">0</p>
+            </article>
+            <article class="summary__card">
+                <p class="summary__label">نسبة الإنجاز</p>
+                <p class="summary__value" id="summary-progress">0%</p>
+            </article>
+        </section>
+
+        <form id="todo-form" class="todo-form" autocomplete="off">
+            <label class="todo-form__field">
+                <span class="todo-form__label">مهمة جديدة</span>
+                <input id="todo-input" name="task" type="text" placeholder="اكتب المهمة ثم اضغط إضافة" dir="auto" required>
+            </label>
+            <label class="todo-form__field">
+                <span class="todo-form__label">الأولوية</span>
+                <select id="priority-select" name="priority">
+                    <option value="high">عالية</option>
+                    <option value="medium" selected>متوسطة</option>
+                    <option value="low">منخفضة</option>
+                </select>
+            </label>
+            <button type="submit" class="primary-button">إضافة</button>
+        </form>
+
+        <section class="toolbar" aria-label="خيارات العرض">
+            <div class="toolbar__group">
+                <label for="search-input" class="visually-hidden">ابحث عن مهمة</label>
+                <input id="search-input" type="search" placeholder="ابحث في المهام" dir="auto">
+            </div>
+            <div class="toolbar__group" role="radiogroup" aria-label="تصفية الحالة">
+                <button type="button" class="chip is-active" data-filter="all" role="radio" aria-checked="true">الكل</button>
+                <button type="button" class="chip" data-filter="active" role="radio" aria-checked="false">نشطة</button>
+                <button type="button" class="chip" data-filter="completed" role="radio" aria-checked="false">منجزة</button>
+            </div>
+            <div class="toolbar__group" role="radiogroup" aria-label="تصفية الأولوية">
+                <button type="button" class="chip is-active" data-priority="all" role="radio" aria-checked="true">
+                    كل الأولويات
+                </button>
+                <button type="button" class="chip" data-priority="high" role="radio" aria-checked="false">عالية</button>
+                <button type="button" class="chip" data-priority="medium" role="radio" aria-checked="false">متوسطة</button>
+                <button type="button" class="chip" data-priority="low" role="radio" aria-checked="false">منخفضة</button>
+            </div>
+            <button id="clear-completed" type="button" class="secondary-button">حذف المنجزة</button>
+        </section>
+
+        <ul id="todo-list" class="todo-list" aria-live="polite" aria-label="قائمة المهام"></ul>
+
+        <footer class="footer">
+            <p id="storage-warning" class="warning" hidden role="alert"></p>
+            <p id="stats-text"></p>
+            <p class="hint">يمكنك النقر مرتين على المهمة لتعديلها أو الضغط على زر التعديل.</p>
+        </footer>
+    </main>
+
+    <template id="todo-item-template">
+        <li class="todo-item">
+            <label class="todo-item__body">
+                <input class="todo-item__checkbox" type="checkbox" aria-label="تحديد كمكتملة">
+                <div class="todo-item__content">
+                    <span class="todo-item__text" tabindex="0"></span>
+                    <span class="todo-item__meta">
+                        <span class="todo-item__priority" data-priority="medium"></span>
+                        <time class="todo-item__date" datetime=""></time>
+                    </span>
+                </div>
+            </label>
+            <div class="todo-item__actions">
+                <button type="button" class="icon-button" data-action="priority" aria-label="تغيير الأولوية">🎯</button>
+                <button type="button" class="icon-button" data-action="edit" aria-label="تعديل المهمة">✏️</button>
+                <button type="button" class="icon-button" data-action="delete" aria-label="حذف المهمة">🗑️</button>
+            </div>
+        </li>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
